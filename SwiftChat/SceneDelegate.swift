@@ -1,9 +1,3 @@
-//
-//  SceneDelegate.swift
-//  SwiftChat
-//
-//  Created by Алексей on 26.08.2022.
-//
 
 import UIKit
 
@@ -15,7 +9,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UIViewController()
+        window?.rootViewController = GreetingsVC()
         window?.makeKeyAndVisible()
     }
 
