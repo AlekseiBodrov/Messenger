@@ -1,7 +1,7 @@
 
 import UIKit
 
-class AuthorizationVC: UIViewController {
+final class AuthorizationVC: UIViewController {
     
     private lazy var getStartedButton: UIButton = {
         let button = UIButton()

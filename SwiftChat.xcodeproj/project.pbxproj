@@ -15,6 +15,8 @@
 		201467FE28B89C6100C4C9C0 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201467FD28B89C6100C4C9C0 /* AuthorizationVC.swift */; };
 		2014680028B89C7400C4C9C0 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201467FF28B89C7400C4C9C0 /* ChatVC.swift */; };
 		2014680228B8B00700C4C9C0 /* DialogsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014680128B8B00700C4C9C0 /* DialogsVC.swift */; };
+		2014680428B8BEE600C4C9C0 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014680328B8BEE600C4C9C0 /* UIButton+ext.swift */; };
+		2014680A28B8C5AE00C4C9C0 /* UICollor+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014680928B8C5AE00C4C9C0 /* UICollor+ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		201467FD28B89C6100C4C9C0 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		201467FF28B89C7400C4C9C0 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		2014680128B8B00700C4C9C0 /* DialogsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogsVC.swift; sourceTree = "<group>"; };
+		2014680328B8BEE600C4C9C0 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
+		2014680928B8C5AE00C4C9C0 /* UICollor+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollor+ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +64,13 @@
 		201467E728B89A7000C4C9C0 /* SwiftChat */ = {
 			isa = PBXGroup;
 			children = (
+				2014680528B8BFB000C4C9C0 /* Extantion */,
 				201467E828B89A7000C4C9C0 /* AppDelegate.swift */,
-				201467EA28B89A7000C4C9C0 /* SceneDelegate.swift */,
-				201467EC28B89A7000C4C9C0 /* GreetingsVC.swift */,
-				2014680128B8B00700C4C9C0 /* DialogsVC.swift */,
-				201467FF28B89C7400C4C9C0 /* ChatVC.swift */,
 				201467FD28B89C6100C4C9C0 /* AuthorizationVC.swift */,
+				201467FF28B89C7400C4C9C0 /* ChatVC.swift */,
+				2014680128B8B00700C4C9C0 /* DialogsVC.swift */,
+				201467EC28B89A7000C4C9C0 /* GreetingsVC.swift */,
+				201467EA28B89A7000C4C9C0 /* SceneDelegate.swift */,
 				201467FC28B89AA100C4C9C0 /* SupportingFiles */,
 			);
 			path = SwiftChat;
@@ -79,6 +84,15 @@
 				201467F328B89A7300C4C9C0 /* LaunchScreen.storyboard */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		2014680528B8BFB000C4C9C0 /* Extantion */ = {
+			isa = PBXGroup;
+			children = (
+				2014680328B8BEE600C4C9C0 /* UIButton+ext.swift */,
+				2014680928B8C5AE00C4C9C0 /* UICollor+ext.swift */,
+			);
+			path = Extantion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,10 +167,12 @@
 			files = (
 				2014680228B8B00700C4C9C0 /* DialogsVC.swift in Sources */,
 				201467ED28B89A7000C4C9C0 /* GreetingsVC.swift in Sources */,
+				2014680A28B8C5AE00C4C9C0 /* UICollor+ext.swift in Sources */,
 				201467E928B89A7000C4C9C0 /* AppDelegate.swift in Sources */,
 				201467FE28B89C6100C4C9C0 /* AuthorizationVC.swift in Sources */,
 				201467EB28B89A7000C4C9C0 /* SceneDelegate.swift in Sources */,
 				2014680028B89C7400C4C9C0 /* ChatVC.swift in Sources */,
+				2014680428B8BEE600C4C9C0 /* UIButton+ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
