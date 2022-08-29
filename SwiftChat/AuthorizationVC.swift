@@ -16,7 +16,13 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.frame = CGRect(x: 24, y: 200, width: screenSize.width - 24 - 24, height: 60)
+        textField.tintColor = .white
+        textField.textColor = .white
+        textField.font = .systemFont(ofSize: 34, weight: .bold)
+        
         textField.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        textField.keyboardAppearance = .dark
+        textField.keyboardType = .numberPad
         textField.delegate = self
         return textField
     }()
@@ -37,6 +43,13 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing")
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print(textField.text)
+        print(range)
+        print(string)
+        return true
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
