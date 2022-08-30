@@ -9,7 +9,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     private lazy var escapeButton: UIButton = {
         let button = UIButton()
-        button.frame = CGRect(x: 16, y: 80, width: 25, height: 25)
+        button.frame = CGRect(x: 18, y: 80, width: 25, height: 25)
         button.setImage(UIImage(named: "left-arrow")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -38,12 +38,13 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         return lable
     }()
 
-    private lazy var textField: PhoneFormattedTextField = {
-        let textField = PhoneFormattedTextField()
+    private lazy var textField: PaddedPhoneTextField = {
+        let textField = PaddedPhoneTextField()
         textField.frame = CGRect(x: 24, y: 200, width: screenSize.width - 24 - 24, height: 60)
+        textField.layer.cornerRadius = 15
         textField.tintColor = .white
         textField.textColor = .white
-        textField.font = .systemFont(ofSize: 34, weight: .bold)
+        textField.font = .systemFont(ofSize: 30, weight: .bold)
 
         textField.config.defaultConfiguration = PhoneFormat(defaultPhoneFormat: "(###) ###-##-##")
         textField.prefix = "+7 "
@@ -77,7 +78,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     lazy var checkbox: M13Checkbox = {
         
-        let checkbox = M13Checkbox(frame: CGRect(x: 47, y: Int(screenSize.height - 200), width: 24, height: Int(20.0)))
+        let checkbox = M13Checkbox(frame: CGRect(x: 47, y: Int(screenSize.height - 210), width: 24, height: Int(24)))
         checkbox.stateChangeAnimation = .bounce(.fill)
         checkbox.checkedValue = 1.0
         checkbox.uncheckedValue = 0.0
@@ -147,6 +148,8 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 //        return button
 //    }()
 
+    // запросить смс код повторно
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -206,21 +209,18 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         textField.endEditing(true)
     }
 
-    @objc private func login() {
-
-        let authorizationVC: AuthorizationVC = {
-            let vc = AuthorizationVC()
-            vc.modalPresentationStyle = .fullScreen
-            vc.modalTransitionStyle = .coverVertical
-            return vc
-        }()
-
-        present(authorizationVC, animated: true) {
-            print("presented AuthorizationVC")
+    func getPhoneNumber() -> String {
+        
+        if let phoneNumber = textField.phoneNumber() {
+            return phoneNumber
+        } else {
+        return  "error"
         }
-        UIView.animate(withDuration: 0.1) {
-            self.escapeButton.transform = .identity
-        } completion: { _ in
+    }
+
+    @objc private func login() {
+        if checkbox.checkState == .checked {
+            app.sendSMSCode(phone: getPhoneNumber())
         }
     }
 
@@ -236,6 +236,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     @objc func lift() {
 //        app.vibrate()
         checkbox.toggleCheckState(true)
+        print(checkbox.checkState.rawValue)
         // move to controller
 //        if checkbox.checkState == .checked {
 //            checkbox.toggleCheckState(true)
@@ -283,14 +284,14 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         }, completion: nil)
     }
 
-@objc func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
             UIView.animate(withDuration: 0.3) {
                 let transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + 10)
-
+                
                 self.checkbox.transform = transform
                 self.checkboxButton.transform = transform
                 self.loginButton.transform = transform
@@ -310,5 +311,6 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
             self.userAgreementButton.transform = .identity
         }
     }
+
 }
 
