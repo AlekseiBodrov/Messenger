@@ -53,7 +53,7 @@ final class GreetingsVC: UIViewController {
     private lazy var getStartedButton: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: 47, y: 200, width: screenSize.width - 47 - 47, height: 67)
-        button.setTitle("Get Started", for: .normal)
+        button.setTitle("Начнем!", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 19, weight: .bold)
         button.addTarget(self, action: #selector(touchDown) , for: .touchDown)
         button.addTarget(self, action: #selector(showAuth), for: .touchUpInside)

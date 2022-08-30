@@ -17,6 +17,7 @@
 		2014680228B8B00700C4C9C0 /* DialogsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014680128B8B00700C4C9C0 /* DialogsVC.swift */; };
 		2014680428B8BEE600C4C9C0 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014680328B8BEE600C4C9C0 /* UIButton+ext.swift */; };
 		2014680A28B8C5AE00C4C9C0 /* UICollor+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014680928B8C5AE00C4C9C0 /* UICollor+ext.swift */; };
+		20D6F35E28BCF3380094D893 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D6F35D28BCF3380094D893 /* Just.swift */; };
 		819FDA07CCC3187597CC9542 /* Pods_SwiftChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30AAC8553D0E8C2E6804E119 /* Pods_SwiftChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		2014680128B8B00700C4C9C0 /* DialogsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogsVC.swift; sourceTree = "<group>"; };
 		2014680328B8BEE600C4C9C0 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		2014680928B8C5AE00C4C9C0 /* UICollor+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollor+ext.swift"; sourceTree = "<group>"; };
+		20D6F35D28BCF3380094D893 /* Just.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
 		30AAC8553D0E8C2E6804E119 /* Pods_SwiftChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8CED3B7AF8029D520F930AE /* Pods-SwiftChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftChat.release.xcconfig"; path = "Target Support Files/Pods-SwiftChat/Pods-SwiftChat.release.xcconfig"; sourceTree = "<group>"; };
 		F5D722D3D81C5FAF730592E5 /* Pods-SwiftChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftChat.debug.xcconfig"; path = "Target Support Files/Pods-SwiftChat/Pods-SwiftChat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -56,7 +58,6 @@
 				F5D722D3D81C5FAF730592E5 /* Pods-SwiftChat.debug.xcconfig */,
 				C8CED3B7AF8029D520F930AE /* Pods-SwiftChat.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -96,6 +97,7 @@
 		201467FC28B89AA100C4C9C0 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				20D6F35D28BCF3380094D893 /* Just.swift */,
 				201467F128B89A7300C4C9C0 /* Assets.xcassets */,
 				201467F628B89A7300C4C9C0 /* Info.plist */,
 				201467F328B89A7300C4C9C0 /* LaunchScreen.storyboard */,
@@ -237,6 +239,7 @@
 				2014680228B8B00700C4C9C0 /* DialogsVC.swift in Sources */,
 				201467ED28B89A7000C4C9C0 /* GreetingsVC.swift in Sources */,
 				2014680A28B8C5AE00C4C9C0 /* UICollor+ext.swift in Sources */,
+				20D6F35E28BCF3380094D893 /* Just.swift in Sources */,
 				201467E928B89A7000C4C9C0 /* AppDelegate.swift in Sources */,
 				201467FE28B89C6100C4C9C0 /* AuthorizationVC.swift in Sources */,
 				201467EB28B89A7000C4C9C0 /* SceneDelegate.swift in Sources */,
