@@ -78,7 +78,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     lazy var checkbox: M13Checkbox = {
         
-        let checkbox = M13Checkbox(frame: CGRect(x: 47, y: Int(screenSize.height - 210), width: 24, height: Int(24)))
+        let checkbox = M13Checkbox(frame: CGRect(x: 47, y: Int(screenSize.height - 204), width: 24, height: Int(24)))
         checkbox.stateChangeAnimation = .bounce(.fill)
         checkbox.checkedValue = 1.0
         checkbox.uncheckedValue = 0.0
@@ -151,6 +151,142 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     // запросить смс код повторно
 
 
+
+
+    lazy var smsConfirmationView: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 20, y: 130, width: screenSize.width - 20 - 20, height: screenSize.height / 2)
+        view.backgroundColor = .black
+        return view
+    }()
+
+    lazy var descriptionLable: UILabel = {
+            let lbl = UILabel()
+            lbl.backgroundColor = .clear
+            lbl.textAlignment = .left
+            lbl.textColor = .white
+            lbl.numberOfLines = 2
+            lbl.frame = CGRect(x: 0, y: 0, width: screenSize.width - 20 - 20, height: 60)
+            lbl.font = .systemFont(ofSize: 20)
+            lbl.attributedText = descriptionString(color: .white)
+//            lbl.alpha = 0.75
+            return lbl
+        }()
+
+    lazy var codeTextFiald: UITextField = {
+        let textField = UITextField()
+        textField.frame = CGRect(x: 30, y: 100, width: screenSize.width, height: 100)
+//        textField.backgroundColor = .white.withAlphaComponent(0.1)
+        textField.font = .systemFont(ofSize: 72, weight: .bold)
+//        textField.attributedText = NSAttributedString(string: "2247",
+//                                                      attributes: [NSAttributedString.Key.kern : 48])
+        textField.delegate = self
+        textField.textColor = .white
+        return textField
+    }()
+
+    lazy var bgView1: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 20 , y: 100, width: screenSize.width / 7, height: 100)
+        view.backgroundColor = .white.withAlphaComponent(0.1)
+        view.layer.cornerRadius = 16
+        return view
+    }()
+
+    lazy var bgView2: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: screenSize.width / 6 + 20 + 20 , y: 100, width: screenSize.width / 7, height: 100)
+        view.backgroundColor = .white.withAlphaComponent(0.1)
+        view.layer.cornerRadius = 16
+        return view
+    }()
+
+    lazy var bgView3: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: (screenSize.width / 6 + 20) * 2 + 20, y: 100, width: screenSize.width / 7, height: 100)
+        view.backgroundColor = .white.withAlphaComponent(0.1)
+        view.layer.cornerRadius = 16
+        return view
+    }()
+
+    lazy var bgView4: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: (screenSize.width / 6 + 20) * 3 + 20, y: 100, width: screenSize.width / 7, height: 100)
+        view.backgroundColor = .white.withAlphaComponent(0.1)
+        view.layer.cornerRadius = 16
+        return view
+    }()
+
+    
+    lazy var attributedLable: UILabel = {
+        let lbl = UILabel()
+        lbl.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        lbl.backgroundColor = .white
+        lbl.text = "повторная отправка смс возможна через \(countDown) сек"
+        return lbl
+    }()
+
+    lazy var countDown = 30 {
+        didSet {
+            attributedLable.text = "повторная отправка смс возможна через \(countDown) сек"
+        }
+    }
+
+    
+    lazy var codeLabel1: UILabel = {
+        let lbl = UILabel()
+        lbl.frame = CGRect(x: 20 , y: 100, width: screenSize.width / 7, height: 100)
+        lbl.textColor = .white
+        lbl.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        lbl.font = .systemFont(ofSize: 70, weight: .bold)
+        lbl.layer.cornerRadius = 16
+        lbl.layer.masksToBounds = true
+        lbl.text = "2"
+        lbl.textAlignment = .center
+
+        return lbl
+    }()
+
+    lazy var codeLabel2: UILabel = {
+        let lbl = UILabel()
+        lbl.frame = CGRect(x: screenSize.width / 6 + 20 + 20 , y: 100, width: screenSize.width / 7, height: 100)
+        lbl.textColor = .white
+        lbl.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        lbl.font = .systemFont(ofSize: 70, weight: .bold)
+        lbl.layer.cornerRadius = 16
+        lbl.layer.masksToBounds = true
+        lbl.text = "4"
+        lbl.textAlignment = .center
+        return lbl
+    }()
+
+    lazy var codeLabel3: UILabel = {
+        let lbl = UILabel()
+        lbl.frame = CGRect(x: (screenSize.width / 6 + 20) * 2 + 20, y: 100, width: screenSize.width / 7, height: 100)
+        lbl.textColor = .white
+        lbl.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        lbl.font = .systemFont(ofSize: 70, weight: .bold)
+        lbl.layer.cornerRadius = 16
+        lbl.layer.masksToBounds = true
+        lbl.text = "9"
+        lbl.textAlignment = .center
+        return lbl
+    }()
+
+    lazy var codeLabel4: UILabel = {
+        let lbl = UILabel()
+        lbl.frame = CGRect(x: (screenSize.width / 6 + 20) * 3 + 20, y: 100, width: screenSize.width / 7, height: 100)
+        lbl.textColor = .white
+        lbl.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        lbl.font = .systemFont(ofSize: 70, weight: .bold)
+        lbl.layer.cornerRadius = 16
+        lbl.layer.masksToBounds = true
+        lbl.text = "3"
+        lbl.textAlignment = .center
+        return lbl
+    }()
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -163,8 +299,25 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
          checkboxButton,
          checkbox,
          userAgreementLabel,
-         userAgreementButton].forEach {
+         userAgreementButton,
+         smsConfirmationView].forEach {
             view.addSubview($0)
+        }
+
+        
+        [descriptionLable,
+         bgView1,
+         bgView2,
+         bgView3,
+         bgView4,
+         codeLabel1,
+         codeLabel2,
+         codeLabel3,
+         codeLabel4,
+        codeTextFiald,
+        attributedLable,
+        codeTextFiald].forEach {
+        smsConfirmationView.addSubview($0)
         }
 
         NotificationCenter.default.addObserver(
@@ -182,6 +335,17 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         )
     }
 
+    func createTimer() {
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            print("Timer fired!")
+            self.countDown -= 1
+
+            if self.countDown == 0 {
+                // кнопка включится
+                // скроется атрибьютлейбл
+            }
+        }
+    }
     @objc private func goBack() {
 
         dismiss(animated: true) {
@@ -198,9 +362,72 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
         print(textField.text)
-        print(range)
         print(string)
+
+        if let text = textField.text, let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+
+            print(text)
+            print(range)
+            print(updatedText)
+
+            let charMax = 4
+
+            if updatedText.count <= charMax {
+                switch updatedText.count {
+                case 0:
+                    bgView1.backgroundColor = .lightGray
+                    bgView2.backgroundColor = .lightGray
+                    bgView3.backgroundColor = .lightGray
+                    bgView4.backgroundColor = .lightGray
+                case 1:
+                    bgView1.backgroundColor = .white
+                    bgView2.backgroundColor = .lightGray
+                    bgView3.backgroundColor = .lightGray
+                    bgView4.backgroundColor = .lightGray
+                case 2:
+                    bgView1.backgroundColor = .white
+                    bgView2.backgroundColor = .white
+                    bgView3.backgroundColor = .lightGray
+                    bgView4.backgroundColor = .lightGray
+                case 3:
+                    bgView1.backgroundColor = .white
+                    bgView2.backgroundColor = .white
+                    bgView3.backgroundColor = .white
+                    bgView4.backgroundColor = .lightGray
+                case 4:
+                    bgView1.backgroundColor = .white
+                    bgView2.backgroundColor = .white
+                    bgView3.backgroundColor = .white
+                    bgView4.backgroundColor = .white
+                default:
+                    break
+                }
+            }
+
+//            switch updatedText.count {
+//            case 0:
+//                codeLabel1.text = updatedText[0]
+//            case 1:
+//                codeLabel2.text = updatedText[0]
+//            case 2:
+//                codeLabel3.text = updatedText[0]
+//            case 3:
+//                codeLabel4.text = updatedText[0]
+//            default:
+//                break
+//            }
+
+//            if textField == codeTextFiald {
+//            codeTextFiald.attributedText = NSAttributedString(string: text,
+//                                                              attributes: [NSAttributedString.Key.kern : 45])
+//            }
+        }
+
+
+
         return true
     }
 
@@ -312,5 +539,18 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         }
     }
 
-}
+    func descriptionString(color: UIColor) -> NSAttributedString {
+        let firstAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white]
+        let secondAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold)]
 
+        let firstString = NSMutableAttributedString(string: "СМС с кодом была отправлена на номер телефона ", attributes: firstAttributes)
+        let secondString = NSAttributedString(string: "\(app.phone) ", attributes: secondAttributes)
+        let secondString2 = NSAttributedString(string: " ", attributes: firstAttributes)
+
+        firstString.append(secondString)
+        firstString.append(secondString2)
+
+        return firstString
+    }
+
+}
