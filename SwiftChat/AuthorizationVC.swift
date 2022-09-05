@@ -2,10 +2,13 @@
 import UIKit
 import SwiftPhoneNumberFormatter
 import M13Checkbox
+import NVActivityIndicatorView
 
 final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     let screenSize = UIScreen.main.bounds
+
+    var activityIndicator: NVActivityIndicatorView!
 
     private lazy var escapeButton: UIButton = {
         let button = UIButton()
@@ -59,7 +62,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: 47, y: screenSize.height - 140 , width: screenSize.width - 47 - 47, height: 67)
-        button.setTitle("Продолжить", for: .normal)
+        button.setTitle("Login", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 19, weight: .bold)
         button.addTarget(self, action: #selector(login), for: .touchUpInside)
 
@@ -155,8 +158,10 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     lazy var smsConfirmationView: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: 20, y: 130, width: screenSize.width - 20 - 20, height: screenSize.height / 2)
+        view.frame = CGRect(x: 20, y: screenSize.height / 11 * 2, width: screenSize.width - 20 - 20, height: screenSize.height / 11 * 9)
         view.backgroundColor = .black
+        view.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+        view.isUserInteractionEnabled = false
         return view
     }()
 
@@ -180,40 +185,43 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         textField.font = .systemFont(ofSize: 72, weight: .bold)
 //        textField.attributedText = NSAttributedString(string: "2247",
 //                                                      attributes: [NSAttributedString.Key.kern : 48])
+        textField.tintColor = .clear
         textField.delegate = self
-        textField.textColor = .white
+        textField.textColor = .clear
+        textField.keyboardAppearance = .dark
+        textField.keyboardType = .numberPad
         return textField
     }()
 
     lazy var bgView1: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: 20 , y: 100, width: screenSize.width / 7, height: 100)
-        view.backgroundColor = .white.withAlphaComponent(0.1)
-        view.layer.cornerRadius = 16
+        view.frame = CGRect(x: 20 + 20 , y: 140, width: 20, height: 20)
+        view.backgroundColor = .white.withAlphaComponent(1)
+        view.layer.cornerRadius = 10
         return view
     }()
 
     lazy var bgView2: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: screenSize.width / 6 + 20 + 20 , y: 100, width: screenSize.width / 7, height: 100)
-        view.backgroundColor = .white.withAlphaComponent(0.1)
-        view.layer.cornerRadius = 16
+        view.frame = CGRect(x: screenSize.width / 6 + 20 + 20 + 20 , y: 140, width: 20, height: 20)
+        view.backgroundColor = .white.withAlphaComponent(1)
+        view.layer.cornerRadius = 10
         return view
     }()
 
     lazy var bgView3: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: (screenSize.width / 6 + 20) * 2 + 20, y: 100, width: screenSize.width / 7, height: 100)
-        view.backgroundColor = .white.withAlphaComponent(0.1)
-        view.layer.cornerRadius = 16
+        view.frame = CGRect(x: (screenSize.width / 6 + 20) * 2 + 20 + 20, y: 140, width: 20, height: 20)
+        view.backgroundColor = .white.withAlphaComponent(1)
+        view.layer.cornerRadius = 10
         return view
     }()
 
     lazy var bgView4: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: (screenSize.width / 6 + 20) * 3 + 20, y: 100, width: screenSize.width / 7, height: 100)
-        view.backgroundColor = .white.withAlphaComponent(0.1)
-        view.layer.cornerRadius = 16
+        view.frame = CGRect(x: (screenSize.width / 6 + 20) * 3 + 20 + 20, y: 140,width: 20, height: 20)
+        view.backgroundColor = .white.withAlphaComponent(1)
+        view.layer.cornerRadius = 10
         return view
     }()
 
@@ -237,11 +245,11 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         let lbl = UILabel()
         lbl.frame = CGRect(x: 20 , y: 100, width: screenSize.width / 7, height: 100)
         lbl.textColor = .white
-        lbl.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        lbl.backgroundColor = .clear
         lbl.font = .systemFont(ofSize: 70, weight: .bold)
         lbl.layer.cornerRadius = 16
         lbl.layer.masksToBounds = true
-        lbl.text = "2"
+//        lbl.text = "2"
         lbl.textAlignment = .center
 
         return lbl
@@ -251,11 +259,11 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         let lbl = UILabel()
         lbl.frame = CGRect(x: screenSize.width / 6 + 20 + 20 , y: 100, width: screenSize.width / 7, height: 100)
         lbl.textColor = .white
-        lbl.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        lbl.backgroundColor = .clear
         lbl.font = .systemFont(ofSize: 70, weight: .bold)
         lbl.layer.cornerRadius = 16
         lbl.layer.masksToBounds = true
-        lbl.text = "4"
+//        lbl.text = "4"
         lbl.textAlignment = .center
         return lbl
     }()
@@ -264,11 +272,11 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         let lbl = UILabel()
         lbl.frame = CGRect(x: (screenSize.width / 6 + 20) * 2 + 20, y: 100, width: screenSize.width / 7, height: 100)
         lbl.textColor = .white
-        lbl.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        lbl.backgroundColor = .clear
         lbl.font = .systemFont(ofSize: 70, weight: .bold)
         lbl.layer.cornerRadius = 16
         lbl.layer.masksToBounds = true
-        lbl.text = "9"
+//        lbl.text = "9"
         lbl.textAlignment = .center
         return lbl
     }()
@@ -277,11 +285,11 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         let lbl = UILabel()
         lbl.frame = CGRect(x: (screenSize.width / 6 + 20) * 3 + 20, y: 100, width: screenSize.width / 7, height: 100)
         lbl.textColor = .white
-        lbl.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        lbl.backgroundColor = .clear
         lbl.font = .systemFont(ofSize: 70, weight: .bold)
         lbl.layer.cornerRadius = 16
         lbl.layer.masksToBounds = true
-        lbl.text = "3"
+//        lbl.text = "3"
         lbl.textAlignment = .center
         return lbl
     }()
@@ -290,8 +298,15 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: view.frame.width / 2 - 14,
+                                                                  y: view.frame.height / 2 - 14,
+                                                                  width: 28,
+                                                                  height: 28),
+                                                    type: .lineSpinFadeLoader, color: .white, padding: 0)
+
         view.backgroundColor = .black
-        [escapeButton,
+        [activityIndicator,
+         escapeButton,
          titleLable,
          subtitleLable,
          textField,
@@ -303,6 +318,8 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
          smsConfirmationView].forEach {
             view.addSubview($0)
         }
+
+        startLoading()
 
         
         [descriptionLable,
@@ -333,6 +350,21 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    func startLoading() {
+        view.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
+    }
+
+    func finishLoading() {
+        view.isUserInteractionEnabled = true
+        activityIndicator.stopAnimating()
     }
 
     func createTimer() {
@@ -366,74 +398,78 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         print(textField.text)
         print(string)
 
-        if let text = textField.text, let textRange = Range(range, in: text) {
+        if let text = textField.text {
+            if let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
 
             print(text)
             print(range)
             print(updatedText)
 
-            let charMax = 4
-
-            if updatedText.count <= charMax {
-                switch updatedText.count {
-                case 0:
-                    bgView1.backgroundColor = .lightGray
-                    bgView2.backgroundColor = .lightGray
-                    bgView3.backgroundColor = .lightGray
-                    bgView4.backgroundColor = .lightGray
-                case 1:
-                    bgView1.backgroundColor = .white
-                    bgView2.backgroundColor = .lightGray
-                    bgView3.backgroundColor = .lightGray
-                    bgView4.backgroundColor = .lightGray
-                case 2:
-                    bgView1.backgroundColor = .white
-                    bgView2.backgroundColor = .white
-                    bgView3.backgroundColor = .lightGray
-                    bgView4.backgroundColor = .lightGray
-                case 3:
-                    bgView1.backgroundColor = .white
-                    bgView2.backgroundColor = .white
-                    bgView3.backgroundColor = .white
-                    bgView4.backgroundColor = .lightGray
-                case 4:
-                    bgView1.backgroundColor = .white
-                    bgView2.backgroundColor = .white
-                    bgView3.backgroundColor = .white
-                    bgView4.backgroundColor = .white
-                default:
-                    break
+                //                                           виды интерполяторов
+                // Анимация
+                
+                let charMax = 4
+                if updatedText.count <= charMax {
+                    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut) {
+                        switch updatedText.count {
+                        case 0:
+                            self.bgView1.backgroundColor = .white
+                            self.bgView2.backgroundColor = .white
+                            self.bgView3.backgroundColor = .white
+                            self.bgView4.backgroundColor = .white
+                            self.codeLabel1.text = ""
+                            self.codeLabel2.text = ""
+                            self.codeLabel3.text = ""
+                            self.codeLabel4.text = ""
+                        case 1:
+                            self.bgView1.backgroundColor = .clear
+                            self.bgView2.backgroundColor = .white
+                            self.bgView3.backgroundColor = .white
+                            self.bgView4.backgroundColor = .white
+                            self.codeLabel1.text = updatedText[0]
+                            self.codeLabel2.text = ""
+                            self.codeLabel3.text = ""
+                            self.codeLabel4.text = ""
+                        case 2:
+                            self.bgView1.backgroundColor = .clear
+                            self.bgView2.backgroundColor = .clear
+                            self.bgView3.backgroundColor = .white
+                            self.bgView4.backgroundColor = .white
+                            self.codeLabel2.text = updatedText[1]
+                            self.codeLabel3.text = ""
+                            self.codeLabel4.text = ""
+                        case 3:
+                            self.bgView1.backgroundColor = .clear
+                            self.bgView2.backgroundColor = .clear
+                            self.bgView3.backgroundColor = .clear
+                            self.bgView4.backgroundColor = .white
+                            self.codeLabel3.text = updatedText[2]
+                            self.codeLabel4.text = ""
+                        case 4:
+                            self.bgView1.backgroundColor = .clear
+                            self.bgView2.backgroundColor = .clear
+                            self.bgView3.backgroundColor = .clear
+                            self.bgView4.backgroundColor = .clear
+                            self.codeLabel4.text = updatedText[3]
+                        default:
+                            break
+                        }
+                    }
+                } else {
+                    return false
                 }
             }
-
-//            switch updatedText.count {
-//            case 0:
-//                codeLabel1.text = updatedText[0]
-//            case 1:
-//                codeLabel2.text = updatedText[0]
-//            case 2:
-//                codeLabel3.text = updatedText[0]
-//            case 3:
-//                codeLabel4.text = updatedText[0]
-//            default:
-//                break
-//            }
-
-//            if textField == codeTextFiald {
-//            codeTextFiald.attributedText = NSAttributedString(string: text,
-//                                                              attributes: [NSAttributedString.Key.kern : 45])
-//            }
         }
-
-
-
         return true
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        textField.endEditing(true)
+//        textField.endEditing(true)
+//        codeTextFiald.endEditing(true)
+
+        view.endEditing(true)
     }
 
     func getPhoneNumber() -> String {
@@ -448,7 +484,17 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     @objc private func login() {
         if checkbox.checkState == .checked {
             app.sendSMSCode(phone: getPhoneNumber())
+            self.view.endEditing(true)
+
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut) {
+                self.smsConfirmationView.transform = .identity
+                self.smsConfirmationView.isUserInteractionEnabled = true
+            } completion: { _ in
+                
+            }
+
         }
+        
     }
 
 //    @objc func showUserAgreement() {
@@ -486,10 +532,10 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         let firstAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white]
         let secondAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue, .foregroundColor: color]
 
-        let firstString = NSMutableAttributedString(string: "Я принимаю ", attributes: firstAttributes)
-        let secondString = NSAttributedString(string: "условия соглашения ", attributes: secondAttributes)
-        let secondString2 = NSAttributedString(string: "и ", attributes: firstAttributes)
-        let thirdString = NSAttributedString(string: "разрешаю обработку персональных данных", attributes: secondAttributes)
+        let firstString = NSMutableAttributedString(string: "I have read and accept ", attributes: firstAttributes)
+        let secondString = NSAttributedString(string: "the conditions of use ", attributes: secondAttributes)
+        let secondString2 = NSAttributedString(string: "and\n", attributes: firstAttributes)
+        let thirdString = NSAttributedString(string: "I authorize the processing of personal data", attributes: secondAttributes)
 
         firstString.append(secondString)
         firstString.append(secondString2)
