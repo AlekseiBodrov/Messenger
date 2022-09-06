@@ -61,19 +61,20 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     private lazy var loginButton: UIButton = {
         let button = UIButton()
-        button.frame = CGRect(x: 47, y: screenSize.height - 140 , width: screenSize.width - 47 - 47, height: 67)
+        button.frame = CGRect(x: screenSize.width * 0.025, y: screenSize.height - ( screenSize.height / 6 ), width: screenSize.width - screenSize.width * 0.05, height: screenSize.height / 13)
         button.setTitle("Login", for: .normal)
+        button.setTitleColor(UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0) , for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 19, weight: .bold)
-        button.addTarget(self, action: #selector(login), for: .touchUpInside)
+        button.addTarget(self, action: #selector(login) , for: .touchDown)
 
-        button.setBackgroundColor(.purple, for: .normal)
-        button.setBackgroundColor(.darkPurple, for: .highlighted)
+        button.setBackgroundColor(.yellow, for: .normal)
+        button.setBackgroundColor(.darkGray, for: .highlighted)
 
-        button.layer.shadowColor = UIColor.red.withAlphaComponent(0.0).cgColor
+        button.layer.shadowColor = UIColor.red.withAlphaComponent(0.9).cgColor
         button.layer.shadowOpacity = 1
         button.layer.shadowOffset = .zero
-        button.layer.shadowRadius = 20
-        button.layer.cornerRadius = 33
+        button.layer.shadowRadius = screenSize.height / 15 / 2
+        button.layer.cornerRadius = screenSize.height / 15 / 3
         button.layer.masksToBounds = true
 
         return button
@@ -285,7 +286,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         let lbl = UILabel()
         lbl.frame = CGRect(x: (screenSize.width / 6 + 20) * 3 + 20, y: 100, width: screenSize.width / 7, height: 100)
         lbl.textColor = .white
-        lbl.backgroundColor = .clear
+        lbl.backgroundColor = .yellow
         lbl.font = .systemFont(ofSize: 70, weight: .bold)
         lbl.layer.cornerRadius = 16
         lbl.layer.masksToBounds = true
@@ -304,7 +305,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
                                                                   height: 28),
                                                     type: .lineSpinFadeLoader, color: .white, padding: 0)
 
-        view.backgroundColor = .black
+        view.backgroundColor = .gray
         [activityIndicator,
          escapeButton,
          titleLable,

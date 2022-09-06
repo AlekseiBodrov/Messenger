@@ -4,7 +4,9 @@ import UIKit
 extension UIColor {
     
     // MARK: UIColor + Colors
-    static let purple = UIColor(red: 100/255, green: 74/255, blue: 225/255, alpha: 1.0)
-    static let darkPurple = UIColor(red: 100/255, green: 74/255, blue: 225/255, alpha: 0.75)
-    static let gray = UIColor(red: 24/255, green: 27/255, blue: 34/255, alpha: 0.75)
-}
+    static let yellow = UIColor(red: 249/255, green: 222/255, blue: 104/255, alpha: 1.0)
+    static let darkYellow = UIColor(red: 39/255, green: 197/255, blue: 162/255, alpha: 1.0)
+    static let green = UIColor(red: 39/255, green: 197/255, blue: 162/255, alpha: 1.0)
+    static let gray = UIColor(red: 24/255, green: 39/255, blue: 46/255, alpha: 1.0)
+    static let darkGray = UIColor(red: 19/255, green: 32/255, blue: 40/255, alpha: 1.0)
+} 
