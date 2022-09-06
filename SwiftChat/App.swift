@@ -12,7 +12,7 @@ class App: NSObject {
         }
     }
 
-    func sendSMSCode(phone: String) {
+    func sendSMSCode(phone: String, complete: () -> Void) {
         
         let randomCode = Int.random(in: 2000...9999)
         let text = "Kод для входа:\n \(randomCode)"
@@ -20,8 +20,10 @@ class App: NSObject {
         Just.get("https://smspilot.ru/api.php",
                  params: ["send": text,
                           "to" : phone,
-                          "apikay" : apiKey]) { response in
+                          "apikay" : apiKey],
+                 asyncCompletionHandler: { response in
             print(response.statusCode)
-        }
+        })
+        complete()
     }
 }

@@ -12,7 +12,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     private lazy var escapeButton: UIButton = {
         let button = UIButton()
-        button.frame = CGRect(x: 18, y: 80, width: 25, height: 25)
+        button.frame = CGRect(x: 18, y: 80, width: 15, height: 15)
         button.setImage(UIImage(named: "left-arrow")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -41,7 +41,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         return lable
     }()
 
-    private lazy var textField: PaddedPhoneTextField = {
+    private lazy var phoneTextField: PaddedPhoneTextField = {
         let textField = PaddedPhoneTextField()
         textField.frame = CGRect(x: 24, y: 200, width: screenSize.width - 24 - 24, height: 60)
         textField.layer.cornerRadius = 15
@@ -79,6 +79,29 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
         return button
     }()
+
+    
+    private lazy var repeatSmsButton: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(x: screenSize.width * 0.025, y: screenSize.height - ( screenSize.height / 6 ), width: screenSize.width - screenSize.width * 0.05, height: screenSize.height / 13)
+        button.setTitle("Repeat SMS", for: .normal)
+        button.setTitleColor(UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0) , for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 19, weight: .bold)
+        button.addTarget(self, action: #selector(login) , for: .touchDown)
+
+        button.setBackgroundColor(.yellow, for: .normal)
+        button.setBackgroundColor(.darkGray, for: .highlighted)
+
+        button.layer.shadowColor = UIColor.red.withAlphaComponent(0.9).cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowOffset = .zero
+        button.layer.shadowRadius = screenSize.height / 15 / 2
+        button.layer.cornerRadius = screenSize.height / 15 / 3
+        button.layer.masksToBounds = true
+
+        return button
+    }()
+
 
     lazy var checkbox: M13Checkbox = {
         
@@ -159,8 +182,8 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     lazy var smsConfirmationView: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: 20, y: screenSize.height / 11 * 2, width: screenSize.width - 20 - 20, height: screenSize.height / 11 * 9)
-        view.backgroundColor = .black
+        view.frame = CGRect(x: 0, y: screenSize.height / 11 * 2, width: screenSize.width, height: screenSize.height / 11 * 9)
+        view.backgroundColor = .darkGray
         view.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
         view.isUserInteractionEnabled = false
         return view
@@ -172,7 +195,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
             lbl.textAlignment = .left
             lbl.textColor = .white
             lbl.numberOfLines = 2
-            lbl.frame = CGRect(x: 0, y: 0, width: screenSize.width - 20 - 20, height: 60)
+            lbl.frame = CGRect(x: screenSize.width * 0.05, y: screenSize.height * 0.05, width: screenSize.width - screenSize.width * 0.05, height: 60)
             lbl.font = .systemFont(ofSize: 20)
             lbl.attributedText = descriptionString(color: .white)
 //            lbl.alpha = 0.75
@@ -181,7 +204,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     lazy var codeTextFiald: UITextField = {
         let textField = UITextField()
-        textField.frame = CGRect(x: 30, y: 100, width: screenSize.width, height: 100)
+        textField.frame = CGRect(x: screenSize.width * 0.05, y: 100, width: screenSize.width, height: 100)
 //        textField.backgroundColor = .white.withAlphaComponent(0.1)
         textField.font = .systemFont(ofSize: 72, weight: .bold)
 //        textField.attributedText = NSAttributedString(string: "2247",
@@ -196,61 +219,73 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     lazy var bgView1: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: 20 + 20 , y: 140, width: 20, height: 20)
+        view.frame = CGRect(x: screenSize.width / 5 - (screenSize.width / 25) / 2 , y: screenSize.height / 11 * 2,
+                            width: screenSize.width / 25 , height: screenSize.width / 25)
         view.backgroundColor = .white.withAlphaComponent(1)
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = screenSize.width / 25 / 2
         return view
     }()
 
     lazy var bgView2: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: screenSize.width / 6 + 20 + 20 + 20 , y: 140, width: 20, height: 20)
+        view.frame = CGRect(x: screenSize.width / 5 * 2 - (screenSize.width / 25) / 2, y: screenSize.height / 11 * 2,
+                            width: screenSize.width / 25 , height: screenSize.width / 25)
         view.backgroundColor = .white.withAlphaComponent(1)
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = screenSize.width / 25 / 2
         return view
     }()
 
     lazy var bgView3: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: (screenSize.width / 6 + 20) * 2 + 20 + 20, y: 140, width: 20, height: 20)
+        view.frame = CGRect(x: screenSize.width / 5 * 3 - (screenSize.width / 25) / 2, y: screenSize.height / 11 * 2,
+                            width: screenSize.width / 25 , height: screenSize.width / 25)
         view.backgroundColor = .white.withAlphaComponent(1)
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = screenSize.width / 25 / 2
         return view
     }()
 
     lazy var bgView4: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: (screenSize.width / 6 + 20) * 3 + 20 + 20, y: 140,width: 20, height: 20)
+        view.frame = CGRect(x: screenSize.width / 5 * 4 - (screenSize.width / 25) / 2, y: screenSize.height / 11 * 2,
+                            width: screenSize.width / 25 , height: screenSize.width / 25)
         view.backgroundColor = .white.withAlphaComponent(1)
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = screenSize.width / 25 / 2
         return view
     }()
 
     
     lazy var attributedLable: UILabel = {
         let lbl = UILabel()
-        lbl.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        lbl.backgroundColor = .white
-        lbl.text = "повторная отправка смс возможна через \(countDown) сек"
+        lbl.frame = CGRect(x: screenSize.width * 0.05, y: screenSize.height / 3, width: screenSize.width, height: 60)
+        lbl.font = .systemFont(ofSize: 18, weight: .medium)
+        lbl.textColor = .white
+        lbl.numberOfLines = 2
+        lbl.text = "Повторная отправка смс\nвозможна через \(countDown)"
         return lbl
     }()
 
     lazy var countDown = 30 {
         didSet {
-            attributedLable.text = "повторная отправка смс возможна через \(countDown) сек"
+            if countDown >= 0 {
+                attributedLable.text = "Повторная отправка смс\nвозможна через \(countDown)"
+            } else {
+                self.loginButton.setTitle("New SMS", for: .normal)
+                self.view.addSubview(loginButton)
+                countDown = 30
+            }
         }
     }
 
     
     lazy var codeLabel1: UILabel = {
         let lbl = UILabel()
-        lbl.frame = CGRect(x: 20 , y: 100, width: screenSize.width / 7, height: 100)
+        lbl.frame = CGRect(x: screenSize.width / 5 - (screenSize.width / 7) / 2 , y: screenSize.height / 11 * 2 - 40,
+                           width: screenSize.width / 7, height: 100)
         lbl.textColor = .white
         lbl.backgroundColor = .clear
         lbl.font = .systemFont(ofSize: 70, weight: .bold)
         lbl.layer.cornerRadius = 16
         lbl.layer.masksToBounds = true
-//        lbl.text = "2"
         lbl.textAlignment = .center
 
         return lbl
@@ -258,59 +293,60 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     lazy var codeLabel2: UILabel = {
         let lbl = UILabel()
-        lbl.frame = CGRect(x: screenSize.width / 6 + 20 + 20 , y: 100, width: screenSize.width / 7, height: 100)
+        lbl.frame = CGRect(x: screenSize.width / 5 * 2 - (screenSize.width / 7) / 2, y: screenSize.height / 11 * 2 - 40,
+                           width: screenSize.width / 7, height: 100)
         lbl.textColor = .white
         lbl.backgroundColor = .clear
         lbl.font = .systemFont(ofSize: 70, weight: .bold)
         lbl.layer.cornerRadius = 16
         lbl.layer.masksToBounds = true
-//        lbl.text = "4"
         lbl.textAlignment = .center
         return lbl
     }()
 
     lazy var codeLabel3: UILabel = {
         let lbl = UILabel()
-        lbl.frame = CGRect(x: (screenSize.width / 6 + 20) * 2 + 20, y: 100, width: screenSize.width / 7, height: 100)
+        lbl.frame = CGRect(x: screenSize.width / 5 * 3 - (screenSize.width / 7) / 2, y: screenSize.height / 11 * 2 - 40,
+                           width: screenSize.width / 7, height: 100)
         lbl.textColor = .white
         lbl.backgroundColor = .clear
         lbl.font = .systemFont(ofSize: 70, weight: .bold)
         lbl.layer.cornerRadius = 16
         lbl.layer.masksToBounds = true
-//        lbl.text = "9"
         lbl.textAlignment = .center
         return lbl
     }()
 
     lazy var codeLabel4: UILabel = {
         let lbl = UILabel()
-        lbl.frame = CGRect(x: (screenSize.width / 6 + 20) * 3 + 20, y: 100, width: screenSize.width / 7, height: 100)
+        lbl.frame = CGRect(x: screenSize.width / 5 * 4 - (screenSize.width / 7) / 2, y: screenSize.height / 11 * 2 - 40,
+                           width: screenSize.width / 7, height: 100)
         lbl.textColor = .white
-        lbl.backgroundColor = .yellow
+        lbl.backgroundColor = .clear
         lbl.font = .systemFont(ofSize: 70, weight: .bold)
         lbl.layer.cornerRadius = 16
         lbl.layer.masksToBounds = true
-//        lbl.text = "3"
         lbl.textAlignment = .center
         return lbl
     }()
 
+    //Mark: viewDidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: view.frame.width / 2 - 14,
-                                                                  y: view.frame.height / 2 - 14,
-                                                                  width: 28,
-                                                                  height: 28),
-                                                    type: .lineSpinFadeLoader, color: .white, padding: 0)
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: (view.frame.width - screenSize.width / 15) / 2,
+                                                                  y: (view.frame.height - screenSize.width / 15) / 2,
+                                                                  width: screenSize.width / 15,
+                                                                  height: screenSize.width / 15),
+                                                    type: .ballRotateChase, color: .white, padding: 0)
 
-        view.backgroundColor = .gray
+        view.backgroundColor = .darkGray
         [activityIndicator,
          escapeButton,
          titleLable,
          subtitleLable,
-         textField,
+         phoneTextField,
          loginButton,
          checkboxButton,
          checkbox,
@@ -319,8 +355,6 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
          smsConfirmationView].forEach {
             view.addSubview($0)
         }
-
-        startLoading()
 
         
         [descriptionLable,
@@ -334,7 +368,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
          codeLabel4,
         codeTextFiald,
         attributedLable,
-        codeTextFiald].forEach {
+         codeTextFiald].forEach {
         smsConfirmationView.addSubview($0)
         }
 
@@ -359,7 +393,8 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     }
 
     func startLoading() {
-        view.isUserInteractionEnabled = false
+//        view.isUserInteractionEnabled = false
+        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
 
@@ -369,15 +404,19 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     }
 
     func createTimer() {
+        
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             print("Timer fired!")
+//            while self.countDown >= 0 {
             self.countDown -= 1
-
-            if self.countDown == 0 {
-                // кнопка включится
-                // скроется атрибьютлейбл
-            }
+//            }
         }
+//            if self.countDown == 0 {
+//                break
+//                // кнопка включится
+//                // скроется атрибьютлейбл
+//            }
+        
     }
     @objc private func goBack() {
 
@@ -474,8 +513,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     }
 
     func getPhoneNumber() -> String {
-        
-        if let phoneNumber = textField.phoneNumber() {
+        if let phoneNumber = phoneTextField.phoneNumber() {
             return phoneNumber
         } else {
         return  "error"
@@ -484,18 +522,22 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
     @objc private func login() {
         if checkbox.checkState == .checked {
-            app.sendSMSCode(phone: getPhoneNumber())
+            app.sendSMSCode(phone: getPhoneNumber()) {
+                self.finishLoading()
+                self.activityIndicator.removeFromSuperview()
+            }
             self.view.endEditing(true)
 
+            startLoading()
+
+            createTimer()
             UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut) {
                 self.smsConfirmationView.transform = .identity
                 self.smsConfirmationView.isUserInteractionEnabled = true
             } completion: { _ in
-                
             }
 
         }
-        
     }
 
 //    @objc func showUserAgreement() {
