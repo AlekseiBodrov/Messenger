@@ -21,6 +21,10 @@
 		20D6F35E28BCF3380094D893 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D6F35D28BCF3380094D893 /* Just.swift */; };
 		20D6F36628BE00990094D893 /* UITextField+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D6F36528BE00990094D893 /* UITextField+ext.swift */; };
 		20D6F36D28BE5A6C0094D893 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D6F36C28BE5A6C0094D893 /* App.swift */; };
+		20D8C04328EB12D700935172 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D8C04228EB12D700935172 /* MessageCell.swift */; };
+		20D8C04528EB137200935172 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D8C04428EB137200935172 /* TabBar.swift */; };
+		20D8C04728EB139300935172 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D8C04628EB139300935172 /* CustomTabBar.swift */; };
+		20D8C04928EB13C100935172 /* DialogsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D8C04828EB13C000935172 /* DialogsCell.swift */; };
 		819FDA07CCC3187597CC9542 /* Pods_SwiftChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30AAC8553D0E8C2E6804E119 /* Pods_SwiftChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +45,10 @@
 		20D6F35D28BCF3380094D893 /* Just.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
 		20D6F36528BE00990094D893 /* UITextField+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+ext.swift"; sourceTree = "<group>"; };
 		20D6F36C28BE5A6C0094D893 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		20D8C04228EB12D700935172 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		20D8C04428EB137200935172 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		20D8C04628EB139300935172 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		20D8C04828EB13C000935172 /* DialogsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogsCell.swift; sourceTree = "<group>"; };
 		30AAC8553D0E8C2E6804E119 /* Pods_SwiftChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8CED3B7AF8029D520F930AE /* Pods-SwiftChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftChat.release.xcconfig"; path = "Target Support Files/Pods-SwiftChat/Pods-SwiftChat.release.xcconfig"; sourceTree = "<group>"; };
 		F5D722D3D81C5FAF730592E5 /* Pods-SwiftChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftChat.debug.xcconfig"; path = "Target Support Files/Pods-SwiftChat/Pods-SwiftChat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,14 +96,18 @@
 		201467E728B89A7000C4C9C0 /* SwiftChat */ = {
 			isa = PBXGroup;
 			children = (
-				2014680528B8BFB000C4C9C0 /* Extantion */,
+				2014680528B8BFB000C4C9C0 /* Extention */,
 				201467E828B89A7000C4C9C0 /* AppDelegate.swift */,
+				201467EA28B89A7000C4C9C0 /* SceneDelegate.swift */,
+				201467EC28B89A7000C4C9C0 /* GreetingsVC.swift */,
 				201467FD28B89C6100C4C9C0 /* AuthorizationVC.swift */,
 				201467FF28B89C7400C4C9C0 /* ChatVC.swift */,
+				20D8C04228EB12D700935172 /* MessageCell.swift */,
 				2014680128B8B00700C4C9C0 /* DialogsVC.swift */,
+				20D8C04428EB137200935172 /* TabBar.swift */,
+				20D8C04628EB139300935172 /* CustomTabBar.swift */,
+				20D8C04828EB13C000935172 /* DialogsCell.swift */,
 				20D6F36C28BE5A6C0094D893 /* App.swift */,
-				201467EC28B89A7000C4C9C0 /* GreetingsVC.swift */,
-				201467EA28B89A7000C4C9C0 /* SceneDelegate.swift */,
 				201467FC28B89AA100C4C9C0 /* SupportingFiles */,
 			);
 			path = SwiftChat;
@@ -112,7 +124,7 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		2014680528B8BFB000C4C9C0 /* Extantion */ = {
+		2014680528B8BFB000C4C9C0 /* Extention */ = {
 			isa = PBXGroup;
 			children = (
 				2014680328B8BEE600C4C9C0 /* UIButton+ext.swift */,
@@ -120,7 +132,7 @@
 				20D6F36528BE00990094D893 /* UITextField+ext.swift */,
 				204AF32A28C5FA7200FE05C0 /* String+ext.swift */,
 			);
-			path = Extantion;
+			path = Extention;
 			sourceTree = "<group>";
 		};
 		D50F4B64A3FF7AC29E2A8F90 /* Frameworks */ = {
@@ -246,9 +258,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2014680228B8B00700C4C9C0 /* DialogsVC.swift in Sources */,
+				20D8C04728EB139300935172 /* CustomTabBar.swift in Sources */,
 				201467ED28B89A7000C4C9C0 /* GreetingsVC.swift in Sources */,
 				20D6F36D28BE5A6C0094D893 /* App.swift in Sources */,
 				2014680A28B8C5AE00C4C9C0 /* UICollor+ext.swift in Sources */,
+				20D8C04328EB12D700935172 /* MessageCell.swift in Sources */,
 				20D6F36628BE00990094D893 /* UITextField+ext.swift in Sources */,
 				20D6F35E28BCF3380094D893 /* Just.swift in Sources */,
 				201467E928B89A7000C4C9C0 /* AppDelegate.swift in Sources */,
@@ -257,6 +271,8 @@
 				2014680028B89C7400C4C9C0 /* ChatVC.swift in Sources */,
 				204AF32B28C5FA7300FE05C0 /* String+ext.swift in Sources */,
 				2014680428B8BEE600C4C9C0 /* UIButton+ext.swift in Sources */,
+				20D8C04528EB137200935172 /* TabBar.swift in Sources */,
+				20D8C04928EB13C100935172 /* DialogsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +428,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -440,7 +456,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

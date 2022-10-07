@@ -2,13 +2,16 @@
 import UIKit
 import SwiftPhoneNumberFormatter
 import M13Checkbox
+import SafariServices
 import NVActivityIndicatorView
 
 final class AuthorizationVC: UIViewController, UITextFieldDelegate {
 
-    let screenSize = UIScreen.main.bounds
+    // MARK: - private properties
+    
+    private let screenSize = UIScreen.main.bounds
 
-    var activityIndicator: NVActivityIndicatorView!
+    private var activityIndicator: NVActivityIndicatorView!
 
     private lazy var escapeButton: UIButton = {
         let button = UIButton()
@@ -60,15 +63,17 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     }()
 
     private lazy var loginButton: UIButton = {
+
         let button = UIButton()
         button.frame = CGRect(x: screenSize.width * 0.025, y: screenSize.height - ( screenSize.height / 6 ), width: screenSize.width - screenSize.width * 0.05, height: screenSize.height / 13)
         button.setTitle("Login", for: .normal)
         button.setTitleColor(UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0) , for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 19, weight: .bold)
-        button.addTarget(self, action: #selector(login) , for: .touchDown)
+        button.addTarget(self, action: #selector(login) , for: .touchUpInside)
+        button.addTarget(self, action: #selector(touchUp), for: .touchUpOutside)
 
         button.setBackgroundColor(.yellow, for: .normal)
-        button.setBackgroundColor(.darkGray, for: .highlighted)
+        button.setBackgroundColor(.darkYellow, for: .highlighted)
 
         button.layer.shadowColor = UIColor.red.withAlphaComponent(0.9).cgColor
         button.layer.shadowOpacity = 1
@@ -252,7 +257,6 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         view.layer.cornerRadius = screenSize.width / 25 / 2
         return view
     }()
-
     
     lazy var attributedLable: UILabel = {
         let lbl = UILabel()
@@ -260,22 +264,20 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         lbl.font = .systemFont(ofSize: 18, weight: .medium)
         lbl.textColor = .white
         lbl.numberOfLines = 2
-        lbl.text = "Повторная отправка смс\nвозможна через \(countDown)"
+        lbl.text = "Repeat sending the SMS \(countDown)"
         return lbl
     }()
 
     lazy var countDown = 30 {
         didSet {
             if countDown >= 0 {
-                attributedLable.text = "Повторная отправка смс\nвозможна через \(countDown)"
+                attributedLable.text = "Repeat sending the SMS \(countDown)"
             } else {
                 self.loginButton.setTitle("New SMS", for: .normal)
                 self.view.addSubview(loginButton)
-                countDown = 30
             }
         }
     }
-
     
     lazy var codeLabel1: UILabel = {
         let lbl = UILabel()
@@ -342,17 +344,17 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
                                                     type: .ballRotateChase, color: .white, padding: 0)
 
         view.backgroundColor = .darkGray
-        [activityIndicator,
-         escapeButton,
+        [escapeButton,
          titleLable,
          subtitleLable,
          phoneTextField,
          loginButton,
-         checkboxButton,
          checkbox,
+         checkboxButton,
          userAgreementLabel,
          userAgreementButton,
-         smsConfirmationView].forEach {
+         smsConfirmationView,
+         activityIndicator].forEach {
             view.addSubview($0)
         }
 
@@ -407,10 +409,11 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             print("Timer fired!")
-//            while self.countDown >= 0 {
+            if self.countDown >= 0 {
             self.countDown -= 1
-//            }
+            }
         }
+        self.countDown = 30
 //            if self.countDown == 0 {
 //                break
 //                // кнопка включится
@@ -433,7 +436,11 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         print("textFieldDidEndEditing")
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
 
         print(textField.text)
         print(string)
@@ -521,10 +528,18 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
     }
 
     @objc private func login() {
+
         if checkbox.checkState == .checked {
+
+            UIView.animate(withDuration: 0.2) {
+                self.loginButton.transform = CGAffineTransform.init(scaleX: 0.98, y: 0.97)
+            } completion: { _ in
+            }
+
             app.sendSMSCode(phone: getPhoneNumber()) {
-                self.finishLoading()
+//                self.finishLoading()
                 self.activityIndicator.removeFromSuperview()
+//                self.step = 2
             }
             self.view.endEditing(true)
 
@@ -537,6 +552,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
             } completion: { _ in
             }
 
+            
         }
     }
 
@@ -632,7 +648,7 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         let firstAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white]
         let secondAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold)]
 
-        let firstString = NSMutableAttributedString(string: "СМС с кодом была отправлена на номер телефона ", attributes: firstAttributes)
+        let firstString = NSMutableAttributedString(string: "The message with activation code is sent to your mobile phone ", attributes: firstAttributes)
         let secondString = NSAttributedString(string: "\(app.phone) ", attributes: secondAttributes)
         let secondString2 = NSAttributedString(string: " ", attributes: firstAttributes)
 
@@ -642,4 +658,24 @@ final class AuthorizationVC: UIViewController, UITextFieldDelegate {
         return firstString
     }
 
+    @objc private func touchUp() {
+
+        UIView.animate(withDuration: 0.1) {
+            self.loginButton.transform = .identity
+        } completion: { _ in
+        }
+    }
+
+    @objc func submit() {
+
+        let navigationController = UINavigationController(rootViewController: TabBar())
+        navigationController.modalPresentationStyle = .fullScreen
+
+//        let vc = ChatVC()
+//        vc.modalPresentationStyle = .fullScreen
+
+        present(navigationController, animated: true) {
+            print("presented ChatVC")
+        }
+    }
 }

@@ -89,16 +89,18 @@ final class GreetingsVC: UIViewController {
         let button = UIButton()
         button.frame = CGRect(x: screenSize.width * 0.025, y: screenSize.height - ( screenSize.height / 6 ), width: screenSize.width - screenSize.width * 0.05, height: screenSize.height / 13)
         button.setTitle("Get started!", for: .normal)
-        button.setTitleColor(UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0) , for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 19, weight: .bold)
+        button.setTitleColor(UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0) , for: .normal)
         button.addTarget(self, action: #selector(touchDown) , for: .touchDown)
         button.addTarget(self, action: #selector(showAuth), for: .touchUpInside)
+        button.addTarget(self, action: #selector(touchUp), for: .touchUpOutside)
 
+//        self.setBackgroundImage(imageWithColor(color: .gray), for: .default)
         button.setBackgroundColor(.yellow, for: .normal)
-        button.setBackgroundColor(.darkGray, for: .highlighted)
+        button.setBackgroundColor(.darkYellow, for: .highlighted)
 
-        button.layer.shadowColor = UIColor.red.withAlphaComponent(0.9).cgColor
-        button.layer.shadowOpacity = 1
+        button.layer.shadowColor = UIColor.red.withAlphaComponent(1).cgColor
+        button.layer.shadowOpacity = -10
         button.layer.shadowOffset = .zero
         button.layer.shadowRadius = screenSize.height / 15 / 2
         button.layer.cornerRadius = screenSize.height / 15 / 3
@@ -109,6 +111,13 @@ final class GreetingsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        UIView.animate(withDuration: 0.5) {
+            self.circleGray1.transform = CGAffineTransform(translationX: 0, y: 4)
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.circleGray2.transform = CGAffineTransform(translationX: 0, y: 4)
+        }
 
         [circleYellow,
          leafImage].forEach {
@@ -138,10 +147,26 @@ final class GreetingsVC: UIViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.animate(withDuration: 0.3) {
+            self.circleGray1.transform = .identity
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.circleGray2.transform = .identity
+        }
+    }
+
     @objc func touchDown() {
         UIView.animate(withDuration: 0.2) {
             self.getStartedButton.transform = CGAffineTransform.init(scaleX: 0.98, y: 0.97)
         } completion: { _ in
+        }
+        UIView.animate(withDuration: 1) {
+            self.circleGray1.transform = CGAffineTransform(translationX: -500, y: 0)
+        }
+        UIView.animate(withDuration: 1) {
+            self.circleGray2.transform = CGAffineTransform(translationX: 500, y: 0)
         }
     }
 
@@ -163,4 +188,17 @@ final class GreetingsVC: UIViewController {
         }
     }
 
+    @objc private func touchUp() {
+
+        UIView.animate(withDuration: 0.1) {
+            self.getStartedButton.transform = .identity
+        } completion: { _ in
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.circleGray1.transform = .identity
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.circleGray2.transform = .identity
+        }
+    }
 }
