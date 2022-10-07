@@ -9,8 +9,10 @@
 
 ## <a id="Basic"></a>Краткое описание
 - Проект написан на **UIKit**
+- Дизайн **Lemonade**
 - Частично адаптивная верстка интерфейса **кодом**.
 - Работа с сетью **URLSession**
+
 
 ## <a id="Presentation"></a>Презентация
 <img src= "https://github.com/AlekseiBodrov/Messenger/blob/main/presentation/1.png" width="200" > <img src= "https://github.com/AlekseiBodrov/Messenger/blob/main/presentation/2.png" width="200" > <img src= "https://github.com/AlekseiBodrov/Messenger/blob/main/presentation/3.png" width="200" >
