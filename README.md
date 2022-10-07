@@ -1,4 +1,5 @@
 # Messenger
+<img src= "https://github.com/AlekseiBodrov/Messenger/blob/main/presentation/1.gif" width="800" >
 ## Оглавление
 - **[Краткое описание](#Basic)**
 - **[Презентация](#Presentation)**
