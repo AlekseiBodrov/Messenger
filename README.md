@@ -1,5 +1,6 @@
 # Messenger
 <img src= "https://github.com/AlekseiBodrov/Messenger/blob/main/presentation/1.gif" width="800" >
+
 ## Оглавление
 - **[Краткое описание](#Basic)**
 - **[Презентация](#Presentation)**
@@ -12,22 +13,16 @@
 - Работа с сетью **URLSession**
 
 ## <a id="Presentation"></a>Презентация
-![Главный экран](./presentation/1.png)
-![Экран детальной информации](./presentation/2.png)
-![Обработка ошибок](./presentation/3.png)
-![Индикатор загрузки](./presentation/4.png)
+<img src= "https://github.com/AlekseiBodrov/Messenger/blob/main/presentation/1.png" width="200" >
+<img src= "https://github.com/AlekseiBodrov/Messenger/blob/main/presentation/2.png" width="200" >
+<img src= "https://github.com/AlekseiBodrov/Messenger/blob/main/presentation/3.png" width="200" >
+<img src= "https://github.com/AlekseiBodrov/Messenger/blob/main/presentation/4.png" width="200" >
+
 ## <a id="Task"></a>Задание
-- Необходимо написать приложение, которое загружает с сервера JSON-файл,
-разбирает его и выводит на экран отсортированный по убыванию даты список с информацией об активных заказах в службе такси.
-- В каждом элементе списка должны отображаться:
-  - Начальный адрес
-  - Конечный адрес
-  - Дата поездки
-  - Стоимость заказа
-- По нажатию на элемент списка необходимо показать экран с детализацией,
-где, помимо перечисленных выше полей, должны отображаться время заказа, а также информация о машине и водителе.
-- При разработке приложения необходимо использовать архитектуру VIPER
-- Приложение должно поддерживать iOS 13.0+ и быть оформлено в соответствии с руководством iOS Human Interface Guidelines.
-Язык программирования для реализации тестового задания – Swift 5.3+
+- .
+
 ## <a id="Task"></a>Будет добавлено
-- Unit testing
+- Экран отправки сообщений
+- Серверная часть
+
+
